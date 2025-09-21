@@ -58,7 +58,7 @@ const Index = () => {
                       variant={userRole === "student" ? "default" : "ghost"}
                       className={`flex-1 transition-all duration-300 ${
                         userRole === "student" 
-                          ? "bg-white text-vit-blue shadow-lg glow-primary" 
+                          ? "bg-white text-vit-blue shadow-lg glow-primary hover:text-white" 
                           : "bg-white/20 text-white hover:bg-white/30"
                       }`}
                       onClick={() => setUserRole("student")}
@@ -70,7 +70,7 @@ const Index = () => {
                       variant={userRole === "admin" ? "default" : "ghost"}
                       className={`flex-1 transition-all duration-300 ${
                         userRole === "admin" 
-                          ? "bg-white text-vit-blue shadow-lg glow-primary" 
+                          ? "bg-white text-vit-blue shadow-lg glow-primary  hover:text-white" 
                           : "bg-white/20 text-white hover:bg-white/30"
                       }`}
                       onClick={() => setUserRole("admin")}
