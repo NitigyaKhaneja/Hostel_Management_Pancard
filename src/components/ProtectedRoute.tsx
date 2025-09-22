@@ -1,6 +1,6 @@
 import React from 'react';
-import { useAuth } from '../hooks/useAuth';
-import LoginForm from './LoginForm';
+import { useAuth } from '../hooks/useauth';
+import { Navigate } from 'react-router-dom'; // 1. Import Navigate
 
 interface ProtectedRouteProps {
   children: React.ReactNode;
@@ -18,8 +18,11 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
   }
 
   if (!user) {
-    return <LoginForm />;
+    // 2. If there's no user, redirect to the /login page
+    return <Navigate to="/login" />;
   }
+
+  // 3. If there is a user, show the children (the dashboard)
   return <>{children}</>;
 };
 

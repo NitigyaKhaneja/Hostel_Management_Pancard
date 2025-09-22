@@ -13,9 +13,7 @@ const Index = () => {
   const [userRole, setUserRole] = useState<"student" | "admin">("student");
   
   return (
-    <AppLayout userRole={userRole} userName={userRole === "student" ? "Rahul Kumar" : "Dr. Warden"}>
       <div className="min-h-screen">
-        {/* Hero Section */}
         <div className="relative overflow-hidden rounded-3xl mb-8 animate-fade-up">
           <div className="hero-gradient p-8 md:p-12">
             <div className="relative z-10">
@@ -270,7 +268,6 @@ const Index = () => {
           </div>
         )}
       </div>
-    </AppLayout>
   );
 };
 

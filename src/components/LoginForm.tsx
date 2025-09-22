@@ -3,6 +3,7 @@ import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'fire
 import { auth } from '../lib/firebase';
 import { Eye, EyeOff, Mail, Lock, User } from 'lucide-react';
 import { toast } from 'sonner';
+import { useNavigate } from 'react-router-dom';
 
 const LoginForm = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -13,6 +14,7 @@ const LoginForm = () => {
     password: '',
     confirmPassword: ''
   });
+  const navigate = useNavigate();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
@@ -38,19 +40,17 @@ const LoginForm = () => {
         await createUserWithEmailAndPassword(auth, formData.email, formData.password);
         toast.success('Account created successfully!');
       }
+      navigate('/'); // Redirect to the main page on success
     } catch (error: any) {
       toast.error(error.message || 'Authentication failed');
+      setLoading(false);
     }
-    
-    setLoading(false);
   };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 via-gray-800 to-black px-4">
       <div className="w-full max-w-md">
-        {/* Form Container */}
         <div className="bg-gray-800/80 backdrop-blur-lg rounded-3xl shadow-2xl p-8 border border-gray-700/50">
-          {/* Header */}
           <div className="text-center mb-8">
             <div className="bg-gradient-to-r from-blue-500 to-purple-500 w-16 h-16 rounded-2xl mx-auto mb-4 flex items-center justify-center shadow-lg">
               <User className="w-8 h-8 text-white" />
@@ -62,10 +62,7 @@ const LoginForm = () => {
               {isLogin ? 'Sign in to your account' : 'Sign up to get started'}
             </p>
           </div>
-
-          {/* Form */}
           <form onSubmit={handleSubmit} className="space-y-6">
-            {/* Email Field */}
             <div className="relative">
               <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                 <Mail className="h-5 w-5 text-gray-400" />
@@ -80,8 +77,6 @@ const LoginForm = () => {
                 placeholder="Enter your email"
               />
             </div>
-
-            {/* Password Field */}
             <div className="relative">
               <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                 <Lock className="h-5 w-5 text-gray-400" />
@@ -103,8 +98,6 @@ const LoginForm = () => {
                 {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
               </button>
             </div>
-
-            {/* Confirm Password Field (Register only) */}
             {!isLogin && (
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
@@ -121,8 +114,6 @@ const LoginForm = () => {
                 />
               </div>
             )}
-
-            {/* Submit Button */}
             <button
               type="submit"
               disabled={loading}
@@ -138,8 +129,6 @@ const LoginForm = () => {
               )}
             </button>
           </form>
-
-          {/* Toggle Mode */}
           <div className="mt-6 text-center">
             <p className="text-gray-400">
               {isLogin ? "Don't have an account?" : "Already have an account?"}
@@ -156,8 +145,6 @@ const LoginForm = () => {
             </p>
           </div>
         </div>
-
-        {/* Footer */}
         <p className="text-center text-gray-500 text-sm mt-6">
           Secure authentication powered by Firebase
         </p>
